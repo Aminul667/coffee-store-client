@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CoffeeCard = ({ coffee }) => {
-  const { _id, name, quantity, supplier, test, category, detail, photo } =
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
+  const { _id, name, quantity, supplier, test, photo } =
     coffee;
 
   const handleDelete = (_id) => {
@@ -26,6 +26,8 @@ const CoffeeCard = ({ coffee }) => {
             console.log(data);
             if (data.deletedCount > 0) {
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              const remaining = coffees.filter(cof => cof._id !== _id);
+              setCoffees(remaining);
             }
           });
       }
